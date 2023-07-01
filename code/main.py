@@ -49,23 +49,9 @@ def get_args_parser():
     parser.add_argument('--momentum', type=float, default=0.9, metavar='M', help='SGD momentum (default: 0.9)')
     parser.add_argument('--weight-decay', type=float, default=0.0, help='weight decay (default: 0.0)')
 
-    # Augmentation parameters
-    parser.add_argument('--color-jitter', type=float, default=0.3, metavar='PCT', help='Color jitter factor (default: 0.3)')
-    parser.add_argument('--aa', type=str, default='rand-m9-mstd0.5-inc1', metavar='NAME',
-                        help='Use AutoAugment policy. "v0" or "original". " + \
-                             "(default: rand-m9-mstd0.5-inc1)'),
-    parser.add_argument('--smoothing', type=float, default=0.1, help='Label smoothing (default: 0.1)')
-    parser.add_argument('--train-interpolation', type=str, default='bicubic',
-                        help='Training interpolation (random, bilinear, bicubic default: "bicubic")')
-
-    # Random Erase parameters
-    parser.add_argument('--reprob', type=float, default=0.25, metavar='PCT', help='Random erase prob (default: 0.25)')
-    parser.add_argument('--remode', type=str, default='pixel', help='Random erase mode (default: "pixel")')
-    parser.add_argument('--recount', type=int, default=1, help='Random erase count (default: 1)')
-
     # Data parameters
     parser.add_argument('--data-path', default='/local_datasets/', type=str, help='dataset path')
-    parser.add_argument('--dataset', default='CIFAR10', type=str, help='dataset name')
+    parser.add_argument('--dataset', default='CIFAR100', type=str, help='dataset name')
     parser.add_argument('--output_dir', default='./output', help='path where to save, empty for no saving')
     parser.add_argument('--device', default='cuda', help='device to use for training / testing')
     parser.add_argument('--seed', default=42, type=int)

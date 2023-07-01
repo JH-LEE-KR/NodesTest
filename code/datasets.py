@@ -61,6 +61,11 @@ def get_dataset(dataset, transform_train, transform_val, args,):
     if dataset == 'CIFAR10':
         dataset_train = datasets.CIFAR10(args.data_path, train=True, download=True, transform=transform_train)
         dataset_val = datasets.CIFAR10(args.data_path, train=False, download=True, transform=transform_val)
+
+    elif dataset == 'CIFAR100':
+        dataset_train = datasets.CIFAR100(args.data_path, train=True, download=True, transform=transform_train)
+        dataset_val = datasets.CIFAR100(args.data_path, train=False, download=True, transform=transform_val)
+
     else:
         NotImplementedError
     

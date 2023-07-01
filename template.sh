@@ -14,7 +14,4 @@
 #source activate something
 python -m torch.distributed.launch \
         --nproc_per_node=8 \
-        --use_env main.py \
-        --model vit_tiny_patch16_224 \
-        --data-path /local_datasets/ \
-        --output_dir ./output 
+        --use_env main.py
