@@ -5,7 +5,7 @@ import argparse
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cluster', type=str, default='trinity', help='cluster name')
+    parser.add_argument('--partition', type=str, default='batch', help='partition name')
     args = parser.parse_args()
     return args
 
@@ -14,7 +14,7 @@ def get_node_info():
     nodes = dict()
     for node_string in node_strings:
         name=re.findall(r'NodeName=(\S+)', node_string)[0]
-        gres=re.findall(r'Gres=(\S+)', node_string)[0].split(':')[1]
+        gres=re.findall(r'Gres=gpu:(\d+)', node_string)[0]
         state=re.findall(r'State=(\S+)', node_string)[0]
         if state != 'IDLE':
             continue
@@ -30,11 +30,7 @@ def create_code(nodes, args):
                 if '#SBATCH --gres=gpu:' in line:
                     f2.write(f'#SBATCH --gres=gpu:{num_gpus}\n')
                 elif '#SBATCH -p' in line:
-                    if args.cluster == 'trinity':
-                        partition = 'batch'
-                    else:
-                        partition = 'batch_grad'
-                    f2.write(f'#SBATCH -p {partition}\n')
+                    f2.write(f'#SBATCH -p {args.partition}\n')
                 elif '#SBATCH -w' in line:
                     f2.write(f'#SBATCH -w {node}\n')
                 elif '--nproc_per_node' in line:
@@ -50,7 +46,7 @@ def main():
     args = get_args()
     nodes = get_node_info()
     create_code(nodes, args)
-    run_code(nodes)
+    # run_code(nodes)
 
 if __name__ == '__main__':
     main()

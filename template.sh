@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=test
+#SBATCH --job-name=admin_test
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:8
 #SBATCH -p admin
@@ -11,7 +11,9 @@
 #SBATCH -o %N_%x_%j.out
 #SBTACH -e %N_%x_%j.err
 
-#source activate something
+source /data/jaeho/init.sh
+conda activate torch38gpu
+
 python -m torch.distributed.launch \
         --nproc_per_node=8 \
         --use_env main.py

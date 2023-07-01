@@ -32,7 +32,7 @@ def get_args_parser():
     parser = argparse.ArgumentParser('Simple training and evaluation configs', add_help=False)
     parser.add_argument('--lr', type=float, default=0.001, metavar='LR', help='learning rate (default: 0.03)')
     parser.add_argument('--batch-size', default=128, type=int, help='Batch size per device')
-    parser.add_argument('--epochs', default=20, type=int)
+    parser.add_argument('--epochs', default=5, type=int)
 
     # Model parameters
     parser.add_argument('--model', default='vit_tiny_patch16_224', type=str, metavar='MODEL', help='Name of model to train')
