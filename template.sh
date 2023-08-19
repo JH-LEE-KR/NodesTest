@@ -11,8 +11,8 @@
 #SBATCH -o %N_%x_%j.out
 #SBTACH -e %N_%x_%j.err
 
-source /data/jaeho/init.sh
-conda activate torch38gpu
+source
+conda
 
 python -m torch.distributed.launch \
         --nproc_per_node=8 \

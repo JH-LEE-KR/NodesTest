@@ -6,6 +6,8 @@ import argparse
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--partition', type=str, default='batch', help='partition name')
+    parser.add_argument('--env_path', type=str, default='/data/jaeho/anaconda3/etc/profile.d/conda.sh', help='path of conda environment')
+    parser.add_argument('--env_name', type=str, default='torch38gpu', help='name of conda environment')
     args = parser.parse_args()
     return args
 
@@ -35,6 +37,10 @@ def create_code(nodes, args):
                     f2.write(f'#SBATCH -w {node}\n')
                 elif '--nproc_per_node' in line:
                     f2.write(f'        --nproc_per_node={num_gpus} \\\n')
+                elif 'source' in line:
+                    f2.write(f'source {args.env_path}\n')
+                elif 'conda' in line:
+                    f2.write(f'conda activate {args.env_name}\n')
                 else:
                     f2.write(line)
 
